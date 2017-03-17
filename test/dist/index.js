@@ -66,19 +66,14 @@ var ReactAtable = function (_React$Component) {
 			var _this2 = this;
 
 			var tableNode = _reactDom2.default.findDOMNode(this.refs.aTable).querySelector('table');
-			var table = new _aTable2.default(tableNode);
-			table.afterRendered = function () {
-				console.log(table.getHtml());
-				_this2.props.afterRendered(table.getHtml());
+			this.table = new _aTable2.default(tableNode);
+			this.table.afterEntered = this.table.afterRendered = function () {
+				if (typeof _this2.props.onUpdate === "function") {
+					_this2.props.onUpdate(_this2.table.getTable());
+				}
 			};
-			table.afterEntered = function () {
-				console.log(table.getHtml());
-				_this2.props.afterEntered(table.getHtml());
-			};
+			this.table.afterRendered();
 		}
-	}, {
-		key: 'afterUpdate',
-		value: function afterUpdate() {}
 	}, {
 		key: 'render',
 		value: function render() {
@@ -28691,60 +28686,90 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var style = {
+	float: "left",
+	width: "50%",
+	height: "500px",
+	boxSizing: "border-box"
+};
+
+var tableStyle = {
+	float: "left",
+	width: "50%",
+	boxSizing: "border-box",
+	backgroundColor: "#666",
+	padding: "10px"
+};
+
 var App = function (_React$Component) {
 	_inherits(App, _React$Component);
 
 	function App() {
 		_classCallCheck(this, App);
 
-		return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+		_this.state = {
+			val: ""
+		};
+		return _this;
 	}
 
 	_createClass(App, [{
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
 
 			return _react2.default.createElement(
-				_index2.default,
-				{ afterRendered: function afterRendered(html) {
-						return console.log(html);
-					} },
+				'div',
+				null,
 				_react2.default.createElement(
-					'table',
-					null,
+					'div',
+					{ style: tableStyle },
 					_react2.default.createElement(
-						'tbody',
-						null,
+						_index2.default,
+						{ onUpdate: function onUpdate(html) {
+								return _this2.setState({ val: html });
+							} },
 						_react2.default.createElement(
-							'tr',
+							'table',
 							null,
 							_react2.default.createElement(
-								'th',
+								'tbody',
 								null,
-								'test'
-							),
-							_react2.default.createElement(
-								'th',
-								null,
-								'test'
-							)
-						),
-						_react2.default.createElement(
-							'tr',
-							null,
-							_react2.default.createElement(
-								'td',
-								null,
-								'hoge'
-							),
-							_react2.default.createElement(
-								'td',
-								null,
-								'hoge'
+								_react2.default.createElement(
+									'tr',
+									null,
+									_react2.default.createElement(
+										'th',
+										null,
+										'test'
+									),
+									_react2.default.createElement(
+										'th',
+										null,
+										'test'
+									)
+								),
+								_react2.default.createElement(
+									'tr',
+									null,
+									_react2.default.createElement(
+										'td',
+										null,
+										'hoge'
+									),
+									_react2.default.createElement(
+										'td',
+										null,
+										'hoge'
+									)
+								)
 							)
 						)
 					)
-				)
+				),
+				_react2.default.createElement('textarea', { value: this.state.val, style: style })
 			);
 		}
 	}]);
