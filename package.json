@@ -39,7 +39,7 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "a-table": "^1.1.2",
+    "a-table": "1.1.5",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.2"

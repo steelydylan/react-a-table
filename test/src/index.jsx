@@ -9,23 +9,22 @@ class App extends React.Component {
   }
 
   render () {
+
     return (
-      <div>
-        <ReactAtable>
-			<table>
-				<tbody>
-					<tr>
-						<th>test</th>
-						<th>test</th>
-					</tr>
-					<tr>
-						<td>hoge</td>
-						<td>hoge</td>
-					</tr>
-				</tbody>
-			</table>
-		</ReactAtable>
-      </div>
+      <ReactAtable afterRendered={(html)=>console.log(html)}>
+				<table>
+					<tbody>
+						<tr>
+							<th>test</th>
+							<th>test</th>
+						</tr>
+						<tr>
+							<td>hoge</td>
+							<td>hoge</td>
+						</tr>
+					</tbody>
+				</table>
+			</ReactAtable>
     )
   }
 }
