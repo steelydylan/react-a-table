@@ -30,7 +30,7 @@ class App extends React.Component {
     return (
       <div>
         <div style={tableStyle}>
-          <ReactAtable onUpdate={(html) => this.setState({ val: html })}>
+          <ReactAtable onUpdate={(html) => this.setState({ val: html })} lang="ja">
             <table>
               <tbody>
                 <tr>

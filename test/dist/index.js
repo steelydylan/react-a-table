@@ -4,17 +4,17 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 
 var _createClass = function () {
-	function defineProperties(target, props) {
-		for (var i = 0; i < props.length; i++) {
-			var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-		}
-	}return function (Constructor, protoProps, staticProps) {
-		if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-	};
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
 }();
 
 var _react = require('react');
@@ -30,61 +30,98 @@ var _aTable = require('a-table');
 var _aTable2 = _interopRequireDefault(_aTable);
 
 function _interopRequireDefault(obj) {
-	return obj && obj.__esModule ? obj : { default: obj };
+  return obj && obj.__esModule ? obj : { default: obj };
 }
 
 function _classCallCheck(instance, Constructor) {
-	if (!(instance instanceof Constructor)) {
-		throw new TypeError("Cannot call a class as a function");
-	}
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
 }
 
 function _possibleConstructorReturn(self, call) {
-	if (!self) {
-		throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-	}return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }return call && ((typeof call === "undefined" ? "undefined" : _typeof(call)) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
-	if (typeof superClass !== "function" && superClass !== null) {
-		throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
-	}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : _typeof(superClass)));
+  }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
 var ReactAtable = function (_React$Component) {
-	_inherits(ReactAtable, _React$Component);
+  _inherits(ReactAtable, _React$Component);
 
-	function ReactAtable() {
-		_classCallCheck(this, ReactAtable);
+  function ReactAtable() {
+    _classCallCheck(this, ReactAtable);
 
-		return _possibleConstructorReturn(this, (ReactAtable.__proto__ || Object.getPrototypeOf(ReactAtable)).call(this));
-	}
+    return _possibleConstructorReturn(this, (ReactAtable.__proto__ || Object.getPrototypeOf(ReactAtable)).call(this));
+  }
 
-	_createClass(ReactAtable, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this2 = this;
+  _createClass(ReactAtable, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
 
-			var tableNode = _reactDom2.default.findDOMNode(this.refs.aTable).querySelector('table');
-			this.table = new _aTable2.default(tableNode);
-			this.table.afterEntered = this.table.afterRendered = function () {
-				if (typeof _this2.props.onUpdate === "function") {
-					_this2.props.onUpdate(_this2.table.getTable());
-				}
-			};
-			this.table.afterRendered();
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement('div', { ref: 'aTable' }, this.props.children);
-		}
-	}]);
+      var tableNode = _reactDom2.default.findDOMNode(this.refs.aTable).querySelector('table');
+      this.table = new _aTable2.default(tableNode, {
+        lang: this.props.lang,
+        mark: this.props.mark,
+        showBtnList: true
+      });
+      this.table.afterEntered = this.table.afterRendered = function () {
+        if (typeof _this2.props.onUpdate === "function") {
+          _this2.props.onUpdate(_this2.table.getTable());
+        }
+      };
+      this.table.afterRendered();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement('div', { ref: 'aTable' }, this.props.children);
+    }
+  }]);
 
-	return ReactAtable;
+  return ReactAtable;
 }(_react2.default.Component);
 
 exports.default = ReactAtable;
+
+ReactAtable.defaultProps = {
+  showBtnList: true,
+  lang: 'en',
+  mark: {
+    align: {
+      default: 'left',
+      left: 'left',
+      center: 'center',
+      right: 'right'
+    },
+    btn: {
+      group: 'a-table-btn-list',
+      item: 'a-table-btn',
+      itemActive: 'a-table-btn-active'
+    },
+    icon: {
+      alignLeft: 'a-table-icon a-table-icon-left',
+      alignCenter: 'a-table-icon a-table-icon-center',
+      alignRight: 'a-table-icon a-table-icon-right',
+      undo: 'a-table-icon a-table-icon-undo',
+      merge: 'a-table-icon a-table-icon-merge02',
+      split: 'a-table-icon a-table-icon-split02',
+      table: 'a-table-icon a-table-icon-th02',
+      source: 'a-table-icon a-table-icon-source01',
+      td: 'a-table-icon a-table-icon-td03',
+      th: 'a-table-icon a-table-icon-th02'
+    },
+    selector: {
+      self: 'a-table-selector'
+    }
+  }
+};
 
 },{"a-table":2,"react":187,"react-dom":36}],2:[function(require,module,exports){
 'use strict';
@@ -28687,94 +28724,94 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var style = {
-	float: "left",
-	width: "50%",
-	height: "500px",
-	boxSizing: "border-box"
+  float: "left",
+  width: "50%",
+  height: "500px",
+  boxSizing: "border-box"
 };
 
 var tableStyle = {
-	float: "left",
-	width: "50%",
-	boxSizing: "border-box",
-	backgroundColor: "#666",
-	padding: "10px"
+  float: "left",
+  width: "50%",
+  boxSizing: "border-box",
+  backgroundColor: "#666",
+  padding: "10px"
 };
 
 var App = function (_React$Component) {
-	_inherits(App, _React$Component);
+  _inherits(App, _React$Component);
 
-	function App() {
-		_classCallCheck(this, App);
+  function App() {
+    _classCallCheck(this, App);
 
-		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
-		_this.state = {
-			val: ""
-		};
-		return _this;
-	}
+    _this.state = {
+      val: ""
+    };
+    return _this;
+  }
 
-	_createClass(App, [{
-		key: 'render',
-		value: function render() {
-			var _this2 = this;
+  _createClass(App, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'div',
-					{ style: tableStyle },
-					_react2.default.createElement(
-						_index2.default,
-						{ onUpdate: function onUpdate(html) {
-								return _this2.setState({ val: html });
-							} },
-						_react2.default.createElement(
-							'table',
-							null,
-							_react2.default.createElement(
-								'tbody',
-								null,
-								_react2.default.createElement(
-									'tr',
-									null,
-									_react2.default.createElement(
-										'th',
-										null,
-										'test'
-									),
-									_react2.default.createElement(
-										'th',
-										null,
-										'test'
-									)
-								),
-								_react2.default.createElement(
-									'tr',
-									null,
-									_react2.default.createElement(
-										'td',
-										null,
-										'hoge'
-									),
-									_react2.default.createElement(
-										'td',
-										null,
-										'hoge'
-									)
-								)
-							)
-						)
-					)
-				),
-				_react2.default.createElement('textarea', { value: this.state.val, style: style })
-			);
-		}
-	}]);
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'div',
+          { style: tableStyle },
+          _react2.default.createElement(
+            _index2.default,
+            { onUpdate: function onUpdate(html) {
+                return _this2.setState({ val: html });
+              }, lang: 'ja' },
+            _react2.default.createElement(
+              'table',
+              null,
+              _react2.default.createElement(
+                'tbody',
+                null,
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'th',
+                    null,
+                    'test'
+                  ),
+                  _react2.default.createElement(
+                    'th',
+                    null,
+                    'test'
+                  )
+                ),
+                _react2.default.createElement(
+                  'tr',
+                  null,
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    'hoge'
+                  ),
+                  _react2.default.createElement(
+                    'td',
+                    null,
+                    'hoge'
+                  )
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement('textarea', { value: this.state.val, style: style })
+      );
+    }
+  }]);
 
-	return App;
+  return App;
 }(_react2.default.Component);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));
