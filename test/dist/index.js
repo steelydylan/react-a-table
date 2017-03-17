@@ -21,6 +21,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _aTable = require('a-table');
 
 var _aTable2 = _interopRequireDefault(_aTable);
@@ -59,7 +63,8 @@ var ReactAtable = function (_React$Component) {
 	_createClass(ReactAtable, [{
 		key: 'componentDidMount',
 		value: function componentDidMount() {
-			var table = new _aTable2.default(this.refs.aTable);
+			var tableNode = _reactDom2.default.findDOMNode(this.refs.aTable).querySelector('table');
+			var table = new _aTable2.default(tableNode);
 		}
 	}, {
 		key: 'render',
@@ -73,7 +78,7 @@ var ReactAtable = function (_React$Component) {
 
 exports.default = ReactAtable;
 
-},{"a-table":2,"react":187}],2:[function(require,module,exports){
+},{"a-table":2,"react":187,"react-dom":36}],2:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -28674,76 +28679,65 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+		_inherits(App, _React$Component);
 
-  function App() {
-    _classCallCheck(this, App);
+		function App() {
+				_classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+				return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+		}
 
-    _this.state = {
-      isOpen: false
-    };
-    _this.openModal = _this.openModal.bind(_this);
-    return _this;
-  }
+		_createClass(App, [{
+				key: 'render',
+				value: function render() {
+						return _react2.default.createElement(
+								'div',
+								null,
+								_react2.default.createElement(
+										_index2.default,
+										null,
+										_react2.default.createElement(
+												'table',
+												null,
+												_react2.default.createElement(
+														'tbody',
+														null,
+														_react2.default.createElement(
+																'tr',
+																null,
+																_react2.default.createElement(
+																		'th',
+																		null,
+																		'test'
+																),
+																_react2.default.createElement(
+																		'th',
+																		null,
+																		'test'
+																)
+														),
+														_react2.default.createElement(
+																'tr',
+																null,
+																_react2.default.createElement(
+																		'td',
+																		null,
+																		'hoge'
+																),
+																_react2.default.createElement(
+																		'td',
+																		null,
+																		'hoge'
+																)
+														)
+												)
+										)
+								)
+						);
+				}
+		}]);
 
-  _createClass(App, [{
-    key: 'openModal',
-    value: function openModal() {
-      this.setState({ isOpen: true });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          _index2.default,
-          null,
-          _react2.default.createElement(
-            'table',
-            null,
-            _react2.default.createElement(
-              'tbody',
-              null,
-              _react2.default.createElement(
-                'tr',
-                null,
-                _react2.default.createElement(
-                  'th',
-                  null,
-                  'test'
-                ),
-                _react2.default.createElement(
-                  'th',
-                  null,
-                  'test'
-                )
-              ),
-              _react2.default.createElement(
-                'tr',
-                null,
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  'hoge'
-                ),
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  'hoge'
-                )
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return App;
+		return App;
 }(_react2.default.Component);
 
 _reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('root'));

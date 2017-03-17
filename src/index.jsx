@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
 import aTable from 'a-table';
 
 export default class ReactAtable extends React.Component {
@@ -8,7 +9,8 @@ export default class ReactAtable extends React.Component {
 	}
 
 	componentDidMount () {
-		const table = new aTable(this.refs.aTable);
+		const tableNode = ReactDOM.findDOMNode(this.refs.aTable).querySelector('table');
+		const table = new aTable(tableNode);
 	}
 
 	render () {
